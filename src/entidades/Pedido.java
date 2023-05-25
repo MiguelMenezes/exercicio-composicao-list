@@ -42,4 +42,22 @@ public class Pedido {
 		return itens;
 	}
 
+	public void adicionarItem(ItemDePedido item) {
+		itens.add(item);
+	}
+
+	public void removerItem(ItemDePedido item) {
+		itens.remove(item);
+	}
+
+	public double totalPedido() {
+
+		double somaTotal = 0;
+		for (ItemDePedido i : itens) {
+			somaTotal += i.subTotal();
+		}
+
+		return somaTotal;
+	}
+
 }

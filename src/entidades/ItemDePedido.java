@@ -40,5 +40,9 @@ public class ItemDePedido {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+	
+	public double subTotal() {
+		return preco * qtde;
+	}
 
 }
