@@ -1,5 +1,6 @@
 package entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,8 +9,11 @@ import entidades.enums.StatusPedido;
 
 public class Pedido {
 
+	private static final SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
 	private Date dataPedido;
 	private StatusPedido status;
+	private Cliente cliente;
 
 	private List<ItemDePedido> itens = new ArrayList<>();
 
@@ -17,9 +21,18 @@ public class Pedido {
 
 	}
 
-	public Pedido(Date dataPedido, StatusPedido status) {
+	public Pedido(Date dataPedido, StatusPedido status, Cliente cliente) {
 		this.dataPedido = dataPedido;
 		this.status = status;
+		this.cliente = cliente;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Date getDataPedido() {
@@ -58,6 +71,27 @@ public class Pedido {
 		}
 
 		return somaTotal;
+	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("Data do pedido: ");
+		sb.append(formatador.format(dataPedido) + "\n");
+		sb.append("Status do pedido: ");
+		sb.append(status + "\n");
+		sb.append("Cliente: ");
+		sb.append(cliente + "\n");
+		sb.append("Itens do pedido: \n");
+		for (ItemDePedido p : itens) {
+			sb.append(p + "\n");
+		}
+		sb.append("Preço total: R$");
+		sb.append(String.format("%.2f", totalPedido()));
+
+		return sb.toString();
+
 	}
 
 }

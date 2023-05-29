@@ -40,9 +40,15 @@ public class ItemDePedido {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	
+
 	public double subTotal() {
 		return preco * qtde;
+	}
+
+	@Override
+	public String toString() {
+		return produto.getNome() + ", R$" + String.format("%.2f", preco) + ", Quantidade: " + qtde + ", Subtotal: R$"
+				+ String.format("%.2f", subTotal());
 	}
 
 }

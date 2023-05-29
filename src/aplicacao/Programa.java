@@ -2,11 +2,17 @@ package aplicacao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
+
 import java.util.Locale;
 import java.util.Scanner;
 
 import entidades.Cliente;
+import entidades.ItemDePedido;
+import entidades.Pedido;
+import entidades.Produto;
+import entidades.enums.StatusPedido;
 
 public class Programa {
 
@@ -31,6 +37,7 @@ public class Programa {
 				.println("------------------------------------------------------------------------------------------");
 		System.out.println("INFORME OS DADOS DO PEDIDO: ");
 		System.out.println("Status do pedido: 1-PAGAMENTO_PENDENTE / 2-PROCESSANDO / 3-ENVIADO / 4-ENTREGUE");
+
 		int opcao = sc.nextInt();
 		String status = null;
 		if (opcao == 1) {
@@ -46,14 +53,32 @@ public class Programa {
 			System.exit(0);
 		}
 
+		Pedido pedido = new Pedido(new Date(), StatusPedido.valueOf(status), cliente);
+
 		System.out.println("Informe o número de itens para o pedido: ");
 		int n = sc.nextInt();
 
 		for (int i = 1; i <= n; i++) {
-				
-			
-				
+
+			System.out.println("DADOS DO ITEM #" + i + ": ");
+			System.out.print("Nome: ");
+			sc.nextLine();
+			String nomeProduto = sc.nextLine();
+
+			System.out.print("Preço (R$): ");
+			double precoProduto = sc.nextDouble();
+
+			System.out.print("Quantidade: ");
+			int qtde = sc.nextInt();
+
+			ItemDePedido itemPedido = new ItemDePedido(qtde, precoProduto, new Produto(nomeProduto, precoProduto));
+			pedido.adicionarItem(itemPedido);
+
 		}
+
+		System.out.println("");
+		System.out.println("RESUMO DO PEDIDO:");
+		System.out.println(pedido);
 
 		sc.close();
 	}

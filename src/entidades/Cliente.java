@@ -1,9 +1,12 @@
 package entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Cliente {
 
+	private static final SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+	
 	private String nome;
 	private String email;
 	private Date dataNasc;
@@ -40,6 +43,11 @@ public class Cliente {
 
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
+	}
+
+	@Override
+	public String toString() {
+		return nome + "(" + formatador.format(dataNasc) + ")" + " - " + email;
 	}
 
 }
